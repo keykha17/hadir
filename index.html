@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1459a6"><title>HADIR PRO</title>
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div><div class="brand">HADIR <b>PRO</b></div><small>Smart Attendance System</small></div><button id="themeBtn" class="iconbtn" aria-label="Ganti tema">◐</button></header>
+<div class="layout">
+<aside class="sidebar">
+<nav id="nav">
+<button class="nav active" data-page="dashboard">▦ <span>Beranda</span></button>
+<button class="nav" data-page="attendance">◷ <span>Absensi</span></button>
+<button class="nav" data-page="members">♙ <span>Anggota</span></button>
+<button class="nav" data-page="history">▤ <span>Riwayat</span></button>
+<button class="nav" data-page="reports">▥ <span>Laporan</span></button>
+<button class="nav" data-page="settings">⚙ <span>Pengaturan</span></button>
+</nav>
+<div class="sidefoot">Data tersimpan di perangkat ini</div>
+</aside>
+<main id="main">
+<section class="page active" id="dashboard">
+<div class="pagehead"><div><p class="eyebrow">RINGKASAN</p><h1>Dashboard</h1><p class="muted" id="todayLabel"></p></div><button class="primary" data-go="attendance">＋ Catat absensi</button></div>
+<div class="stats">
+<div class="stat"><span>Jumlah anggota</span><strong id="totalMembers">0</strong><small>Terdaftar</small></div>
+<div class="stat green"><span>Hadir hari ini</span><strong id="presentCount">0</strong><small>Sudah absen masuk</small></div>
+<div class="stat orange"><span>Terlambat</span><strong id="lateCount">0</strong><small>Hari ini</small></div>
+<div class="stat red"><span>Belum hadir</span><strong id="absentCount">0</strong><small>Belum tercatat</small></div>
+</div>
+<div class="panel"><div class="panelhead"><div><h2>Aktivitas terbaru</h2><p class="muted">Catatan kehadiran terbaru</p></div><button class="linkbtn" data-go="history">Lihat semua →</button></div><div id="recentList" class="tablewrap"></div></div>
+<div class="notice">ℹ️ <div><b>Mode lokal aktif</b><p>Data disimpan pada browser/perangkat ini. Ekspor cadangan secara berkala melalui menu Laporan.</p></div></div>
+</section>
+<section class="page" id="attendance">
+<div class="pagehead"><div><p class="eyebrow">PENCATATAN</p><h1>Absensi</h1><p class="muted">Catat kehadiran anggota.</p></div></div>
+<div class="panel formpanel"><form id="attendanceForm">
+<label>Nama anggota<select id="attMember" required></select></label>
+<div class="formgrid"><label>Tanggal<input id="attDate" type="date" required></label><label>Waktu<input id="attTime" type="time" required></label></div>
+<label>Status<select id="attStatus"><option>Hadir</option><option>Terlambat</option><option>Izin</option><option>Sakit</option><option>Dinas luar</option><option>Alpa</option></select></label>
+<label>Jenis pencatatan<select id="attType"><option>Masuk</option><option>Pulang</option></select></label>
+<label>Catatan (opsional)<textarea id="attNote" rows="2" placeholder="Keterangan tambahan..."></textarea></label>
+<button class="primary" type="submit">Simpan absensi</button>
+</form></div>
+<div class="panel"><div class="panelhead"><div><h2>Absensi hari ini</h2><p class="muted">Daftar catatan tanggal ini</p></div></div><div id="todayAttendance" class="tablewrap"></div></div>
+</section>
+<section class="page" id="members">
+<div class="pagehead"><div><p class="eyebrow">DATA MASTER</p><h1>Anggota</h1><p class="muted">Kelola pegawai, siswa, atau anggota organisasi.</p></div></div>
+<div class="panel formpanel"><h2>Tambah anggota</h2><form id="memberForm" class="inlineform"><label>Nama lengkap<input id="memberName" required placeholder="Nama anggota"></label><label>ID / Nomor induk<input id="memberCode" placeholder="Opsional"></label><label>Divisi / Kelas<input id="memberGroup" placeholder="Opsional"></label><button class="primary" type="submit">＋ Tambah</button></form></div>
+<div class="panel"><div class="panelhead"><h2>Daftar anggota</h2><input id="memberSearch" class="search" placeholder="Cari nama..."></div><div id="memberList" class="tablewrap"></div></div>
+</section>
+<section class="page" id="history">
+<div class="pagehead"><div><p class="eyebrow">ARSIP</p><h1>Riwayat absensi</h1><p class="muted">Telusuri catatan yang sudah disimpan.</p></div></div>
+<div class="panel"><div class="panelhead"><input id="historyDate" type="date"><select id="historyStatus"><option value="">Semua status</option><option>Hadir</option><option>Terlambat</option><option>Izin</option><option>Sakit</option><option>Dinas luar</option><option>Alpa</option></select></div><div id="historyList" class="tablewrap"></div></div>
+</section>
+<section class="page" id="reports">
+<div class="pagehead"><div><p class="eyebrow">ANALISIS DATA</p><h1>Laporan</h1><p class="muted">Unduh dan cadangkan data absensi.</p></div></div>
+<div class="reportgrid"><div class="panel"><h2>Ekspor absensi</h2><p class="muted">Unduh seluruh catatan absensi dalam format CSV yang dapat dibuka dengan Excel.</p><button id="exportCsv" class="primary">↓ Ekspor CSV</button></div><div class="panel"><h2>Cadangan data</h2><p class="muted">Simpan anggota dan absensi sebagai file JSON untuk dipindahkan atau dipulihkan.</p><button id="backupBtn" class="secondary">↓ Unduh cadangan</button><label class="filelabel">Pulihkan cadangan JSON<input id="restoreFile" type="file" accept=".json,application/json"></label></div></div>
+<div class="panel"><h2>Ringkasan keseluruhan</h2><div class="stats compact"><div class="stat"><span>Total catatan</span><strong id="totalRecords">0</strong></div><div class="stat"><span>Hadir</span><strong id="allPresent">0</strong></div><div class="stat"><span>Terlambat</span><strong id="allLate">0</strong></div></div></div>
+</section>
+<section class="page" id="settings">
+<div class="pagehead"><div><p class="eyebrow">PREFERENSI</p><h1>Pengaturan</h1><p class="muted">Atur identitas dan kebijakan dasar.</p></div></div>
+<div class="panel formpanel"><form id="settingsForm"><label>Nama organisasi<input id="orgName" placeholder="Nama sekolah / kantor"></label><label>Batas waktu masuk<input id="cutoff" type="time"></label><p class="muted small">Status terlambat otomatis ditentukan saat waktu absensi masuk melewati batas ini. Status yang dipilih manual tetap dapat digunakan.</p><button class="primary">Simpan pengaturan</button></form></div>
+<div class="panel dangerzone"><h2>Zona berbahaya</h2><p class="muted">Menghapus seluruh data lokal tidak dapat dibatalkan. Unduh cadangan terlebih dahulu.</p><button id="clearData" class="danger">Hapus seluruh data</button></div>
+</section>
+</main>
+</div>
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
