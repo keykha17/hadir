@@ -1,0 +1,10 @@
+{
+  "name": "HADIR PRO",
+  "short_name": "HADIR PRO",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#1459a6",
+  "description": "Aplikasi manajemen kehadiran offline-first",
+  "icons": []
+}
